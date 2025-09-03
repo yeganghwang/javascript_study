@@ -1,4 +1,5 @@
 # 연산자
+[MDN 문서](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Expressions_and_operators)
 ---
 연산자란...
 > 데이터에 연산을 수행하고 값을 조작하며, 변수에 값을 할당하거나 비교하고 논리적인 판단을 내리는 데 사용되는 기호. `산술` 연산자, `비교` 연산자, `논리` 연산자, `할당` 연산자가 있다.
