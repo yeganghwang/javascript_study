@@ -25,3 +25,21 @@ if ( 0 && printHelloAndReturnTrue() ) {}; // 출력 안 됨, false
 console.log( printHelloAndReturnTrue() && NaN ); // "Hello World", NaN
 console.log( true && undefined ); // undefined
 ```
+
+
+## '||'
+OR 연산자로, 피연산자를 오른쪽으로 평가하면서 truthy한 값을 만나면 즉시 그 값을 반환하고,
+모든 값이 falsy하다면 마지막 값을 반환한다.
+|입력1|입력2|출력|
+|---|---|---|
+|false|false|false|
+|false|true|true|
+|true|false|true|
+|true|true|true|
+
+좌측 값이 truthy하다면, 우측의 값은 평가조차 되지 않는다.
+첫 번째 truthy한 항을 반환하거나 마지막 falsy한 항을 반환한다.
+``` javascript
+console.log("" || null || undefined || 3 || 9); // 3
+console.log("" || 0 || undefined || NaN); // NaN
+```
