@@ -39,6 +39,7 @@ let lessEqual = 5 <= 5;           // true
 JavaScript 에서는 `&&` 와 `||` 이 갖는 특별한 기능이 있다. 문서참조
 1. [`&&`](./and_or.md) : AND 연산자. 좌항과 우항의 논리값이 모두 `true` 라면 `true`, 아니면 `false`를 반환한다.
 2. [`||`](./and_or.md) : OR 연산자. 좌항의 논리값 중 하나 이상의 값이 `true` 라면 `true`, 하나라도 `true` 가 아니라면 `false`를 반환한다.
+3. [`??`](./nullish.md) : nullish 병합 연산자. 피연산자 값 중 첫번째 **확정된** 변수를 찾아 반환한다.
 ``` javascript
 console.log( (5 > 3) && isNaN("one") );  // true
 console.log( false && (3 < 7) );         // false
