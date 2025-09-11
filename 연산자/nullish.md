@@ -12,3 +12,7 @@ let delayTime = 0;
 console.log(delayTime || 100); // 100
 console.log(delayTime ?? 100); // 0
 ```
+OR 연산자는 '0'을 'false'로 간주하여 100을 반환하는 반면,
+nullish 병합 연산자는 `delayTime`이 null이나 undefined가 아니므로 0을 반환한다.
+
+**`??` 연산자는 `&&` 연산자나 `||` 연산자와 함께 사용하지 못한다.**
