@@ -10,6 +10,7 @@ JavaScript 기술 학습입니다.
 2. [함수](./함수/function.md)
 	* [함수 선언](./함수/declaration.md)
 	* [함수 표현식](./함수/expression.md)
+ 	* [new Function](./함수/newFunction.md)
 	* 콜백 함수
 	* 화살표 함수
 3. 객체
