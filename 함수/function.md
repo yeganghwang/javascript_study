@@ -5,6 +5,10 @@
 [함수 선언](./declaration.md)
 ## 함수 표현식
 [함수 표현식](./expression.md)
+
+## new Function
+[new Function](./newFunction.md)
+
 ### 콜백 함수
 [콜백 함수](./callback.md)
 ### 화살표 함수
