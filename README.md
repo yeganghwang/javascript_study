@@ -14,4 +14,4 @@ JavaScript 기술 학습입니다.
 	* [콜백 함수](./함수/callback.md)
 	* [화살표 함수](./함수/arrow.md)
 3. [객체](./객체/object.md)
-4. 자료형
+4. [자료형](./자료형/type.md)
