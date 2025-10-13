@@ -5,7 +5,7 @@ JavaScript 기술 학습입니다.
 
 
 1. [연산자](./연산자/operator.md)
-	* [논리 연산자 '||', '&&'](./연산자/add_or.md)
+	* [논리 연산자 '||', '&&'](./연산자/and_or.md)
 	* [nullish 병합 연산자 '??'](./연산자/nullish.md)
 2. [함수](./함수/function.md)
 	* [함수 선언](./함수/declaration.md)
