@@ -32,6 +32,45 @@ for (let key in user) {
 delete user.surname;
 ```
 ## 객체 메서드와 `this`
+객체 안에 메서드를 만들 수 있다.
+```js
+function sayHi() {
+  console.log("Hi!");
+}
+
+let user = {
+  name: "John",
+  age: 13,
+  sayHi: sayHi
+};
+
+user.sayHi(); // 메서드 호출
+```
+또한 메서드 내부에서 `this` 키워드를 사용하면 객체에 접근할 수 있다.
+점 앞의 `this`는 객체를 나타낸다.
+`this`는 다른 언어와 달리 모든 함수에서 사용할 수 있다.
+```js
+function sayHi() {
+  console.log("my name is " + this.name);
+}
+user.sayHi = sayHi;
+user.sayHi(); // my name is John
+```
+화살표 함수 안에서 `this`를 사용하면 화살표 함수 바깥에 있는 외부 함수에서 `this`값을 가져 온다.
+```js
+this.name = "John External";  // 외부 전역 환경
+const hello = () => console.log("My arrow-function name is " + this.name);
+
+let user = {
+  name: "John Internal",
+  age: 15,
+  hello: hello  
+}
+
+user.hello();    // My arrow-function name is John External
+```
+
+
 ## `new` 연산자와 생성자 함수
 ## 옵셔널 체이닝 `?.`
 ## 심볼
