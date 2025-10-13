@@ -58,7 +58,7 @@ user.sayHi(); // my name is John
 ```
 화살표 함수 안에서 `this`를 사용하면 화살표 함수 바깥에 있는 외부 함수에서 `this`값을 가져 온다.
 ```js
-this.name = "John External";  // 외부 전역 환경
+name = "John External";  // 외부 전역 환경
 const hello = () => console.log("My arrow-function name is " + this.name);
 
 let user = {
