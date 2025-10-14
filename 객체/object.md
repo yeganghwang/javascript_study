@@ -72,6 +72,69 @@ user.hello();    // My arrow-function name is John External
 
 
 ## `new` 연산자와 생성자 함수
+생성자 함수는 일반 함수와 거의 같은데, `new` 연산자를 붙여서 실행한다. 그리고 함수의 첫 글자가 대문자이다. 소문자여도 생성자 함수를 실행할 수 있지만 일반 함수와 생성자 함수를 구분하기 위하여 생성자 함수의 첫 글자는 대문자를 사용한다.
+`new` 연산자를 사용하면 암시적으로 `this` 객체가 만들어지고 `this`를 반환한다.
+```js
+function User(name) {
+  this.name = name;
+  this.isAdmin = false;
+}
+반환문도 존재하지 않고 `this` 객체도 없지만 실제로는 `this` 객체를 암시적으로 만든 후 반환한다.
+```js
+function User(name) {
+  this = {};
+  this.name = name;
+  this.isAdmin = false;
+}
+```
+이렇게 `this` 객체를 암시적으로 만든 후 반환한다.
+이렇게 만들어진 생성자는 `new` 연산자를 붙여서 실행한다.
+```js
+let user1 = new User("황예강");
+let user2 = new User("홍길동");
+let user3 = new User("John Doe");
+```
+### 생성자의 `return`문
+생성자 함수에는 return문이 없다. 반환해야 할 것은 this에 저장되고 this가 반환되기 때문이다.
+그러나 `return`문 뒤에 객체가 오면 생성자는 해당 객체를 반환하고, 원시형을 반환한다면 해당 `return`문이 무시된다.
+1. return문이 있고, 객체를 반환하는 경우
+   ```js
+   function Test() {
+     let obj = {name: "객체"};
+     this.name = "황예강";
+
+     return obj;
+   }
+   test = new Test();
+   console.log(test.name);
+   ```
+   결과 : `객체`
+2. return문이 있고, 일반 자료형을 반환하는 경우
+   ```js
+   function Test() {
+     let myNewName = "홍길동";
+     this.name = "황예강";
+
+     return myNewName;  // 원시형을 반환하기에 무시된다.
+     //return this; 가 실행된다.
+   }
+   ```
+   결과 : `황예강`
+### 생성자 내의 메서드
+생성자 안에 있는 함수는 메서드라고 부른다.
+```js
+function User(name) {
+  this.name = name;
+  this.sayHello = function () {
+    console.log(`안녕하세요, 제 이름은 ${this.name} 입니다.`);
+  };
+}
+
+let user = new User("황예강");
+let user2 = new User("홍길동");
+user.sayHello();
+user2.sayHello();
+```
 ## 옵셔널 체이닝 `?.`
 ## 심볼
 ## 객체를 원시형으로 변환
