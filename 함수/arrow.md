@@ -1,6 +1,6 @@
 # 화살표 함수
 함수 선언을 간단히 할 수 있다.
-## 사용법
+## 사용법 
 ```js
 let add = function (a, b) {
   return a + b;
