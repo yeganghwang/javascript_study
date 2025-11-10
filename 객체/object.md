@@ -135,6 +135,123 @@ let user2 = new User("홍길동");
 user.sayHello();
 user2.sayHello();
 ```
-## 옵셔널 체이닝 `?.`
+## 옵셔널 체이닝
+### `?.`
+```js
+let user = {};
+console.log(user.address.street); // 에러 발생
+console.log(user.address?.street); // undefined
+```
+존재 여부가 확실하지 않은 값을 에러 없이 확인할 수 있다.
+빈 객체 `user`에는 `address` 프로퍼티가 존재하지 않은데(undefined), undefined의 하위 프로퍼티인 `street`을 찾으려고 하는 경우 아래와 같은 에러가 발생한다.
+```js
+Uncaught TypeError: Cannot read properties of undefined (reading 'street')
+```
+`?.` '앞'의 평가 대상이 `undefined`나 `null`인 경우 평가를 멈추고 `undefined`를 반환하므로 에러가 발생하지 않는다.
+즉 `user.address?.street`에서 `user.address`가 `undefined`이므로 뒤의 프로퍼티 `street`을 평가하지 않고 `undefined`를 반환한다.
+
+### `?.()`
+존재 여부가 확실하지 않은 함수를 호출할 수 있다.
+존재한다면 실행하고, 존재하지 않다면 아무 일도 일어나지 않는다.
+```js
+let user1 = {
+  admin() {
+    console.log("관리자 계정입니다.");
+  }
+}
+let user2 = {};
+
+user1.admin?.(); // admin 실행
+user2.admin?.(); // 아무 일도 일어나지 않는다.
+```
+
+### `?.[]`
+객체 존재 여부가 확실하지 않은 경우에도 안전하게 프로퍼티를 읽을 수 있다.
+```js
+let user1 = { firstName: "Violet" };
+let user2 = null;
+let key = "firstName";
+
+alert( user1?.[key] ); // Violet
+alert( user2?.[key] ); // undefined
+alert( user1?.[key]?.something?.not?.existing); // undefined
+```
 ## 심볼
+심볼은 유일한 식별자를 생성할 때 사용한다.
+```js
+let id = Symbol("아이디"); // 설명(심볼 이름)이 "아이디"
+console.log(id.toString()); // 'Symbol("아이디")'
+console.log(id.description); // '아이디'
+```
+### 숨김 프로퍼티
+외부 코드에서 접근이 불가능한 프로퍼티이다.
+```js
+let user = { name: "John" }; // 이 객체에 함부로 프로퍼티를 추가할 수 없을 때
+let id = Symbol("id"); // 심볼을 이용하여
+user[id] = 1; // 숨김 프로퍼티를 만들 수 있다.
+console.log(user[id]); // 1. 외부에서 접근이 불가능하다.
+```
+객체 리터럴`{...}`으로 객체를 만든 경우에는 대괄호를 사용한다.
+숨김 프로퍼티는 `for...in`에서 배제되며,
+`Object.assign()`을 이용하여 복사하는 경우에는 복사된다.
+```js
+let id = Symbol("id");
+let user = {
+  name: "John",
+  [id] : 123
+};
+
+for (let i in user) {
+  console.log(`${i}: ${user[i]}`); // name: "John" 만 출력된다. id는 숨김 프로퍼티이므로 출력되지 않는다.
+}
+
+let obj = Object.assign({}, user); // user 객체를 복사하여 obj에 저장
+console.log(obj); // { name: 'John', id: 123, [Symbol(id)]: 1 } 모두 다 복사된다.
+```
 ## 객체를 원시형으로 변환
+원시값을 기대하는 내장 함수나 연산자를 사용할 때 형 변환은 자동으로 일어난다.
+
+이 때 `hint`라 불리는 값이 구분의 기준이 된다. ‘목표로 하는 자료형’이다.
+
+- `"string"` 문자열을 기대하는 연산을 수행할 때는 hint가 `string`이 된다.
+- `"number"` 수학 연산을 적용하려 할 때 hint는 `number`가 된다.
+- `"default"` 연산자가 기대하는 자료형이 확실치 않을 때 `default`가 된다.
+    - `+`는 두 문자열을 합치는 연산을 할 수도 있고 두 숫자를 더하는 연산도 할 수 있기에, `+`의 인수가 객체인 경우에는 hint가 `default`가 된다.
+    - `==`를 사용해 객체-문자형, 객체-숫자형, 객체-심볼형끼리 비교할 때도 객체를 어떤 자료로 바꿔야 할 지 확신이 안 서므로 hint는 defulat가 된다.
+
+`Symbol.toPrimitive`라는 내장 심볼이 존재한다. 이 심볼은 hint를 명명하는 데 사용된다.
+
+```jsx
+let user = {
+	name: "John",
+	money: 1000,
+	
+	[Symbol.toPrimitive](hint) {
+		console.log("hint : " + hint);
+		return hint == "string" ? `{name: "${this.name}"}` : this.money;
+		}
+	};
+	
+	console.log(user); // hint : string -> {name: "John"}
+	console.log(+user); // hint : number -> 1000
+	console.log(user + 500); // hint : default -> 1500
+```
+
+또는 구식의 방법이지만 아래의 방법을 사용할 수도 있다. 본래 `toString()`은 ‘[object Object]’를 반환하고, `valueOf()`는 객체 자신을 반환하는데, 이 메서드들을 사용해서 형 변환을 구현할 수도 있다.
+
+```jsx
+let user = {
+	name: "johnson",
+	age: 30,
+	
+	toString() {
+		return this.name;
+	}
+	
+	valueOf() {
+		return this.age;
+	}
+
+console.log(String(user)); // johnson
+console.log(Number(user)); // 30
+```
