@@ -14,6 +14,14 @@ JavaScript 기술 학습입니다.
 	* [콜백 함수](./함수/callback.md)
 	* [화살표 함수](./함수/arrow.md)
 3. [객체](./객체/object.md)
-4. [자료형](./자료형/type.md)
+4. [자료형](./자료형/type.md) // 작성중
+   	* [숫자형](./자료형/number.md)
+   	* [문자열형](./자료형/string.md)
+   	* [배열형](./자료형/array.md)
+   	* [iterable](./자료형/iterable.md)
+   	* [맵](./자료형/map.md)
+   	* [셋](./자료형/set.md)
+   	* [구조 분해 할당](./자료형/destructing_assignment.md)
+   	* [Date 객체와 날짜](./자료형/date.md)
 ---
 5. [클래스](./클래스/class.md)
