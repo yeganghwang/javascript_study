@@ -599,7 +599,7 @@ console.log(item2); // Donut
         console.log(date.getDate()); // 1
         ```
         
-- `Date.parse(str)` 문자열을 timestamp로 변환하는 함수
+- `Date.parse(str)` 문자열을 timestamp로 변환하는 함수 
     
     문자열에서 날짜를 읽어올 수 있다. 단, 문자열의 형식은 `YYYY-MM-DDTHH:mm:ss:sssZ` 처럼 생겨야 한다.
     
